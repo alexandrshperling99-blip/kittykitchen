@@ -6,10 +6,15 @@
     "build": "next build",
     "start": "next start"
   },
-  "dependencies": {
+ "dependencies": {
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "@google/generative-ai": "^0.1.2"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
   }
-}
