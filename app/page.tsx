@@ -20,8 +20,9 @@ export default function Page() {
 
   return (
     <div className="container">
-      <header style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ color: '#5F7A76' }}>Китти Кичен</h1>
+      <header className="header">
+        <h1 className="title">Китти Кичен</h1>
+        <p className="subtitle">Скандинавский уют и рецепты</p>
       </header>
       
       <div className="card">
@@ -35,14 +36,11 @@ export default function Page() {
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
             <button className="button" onClick={handleSearch}>Найти</button>
-            <p style={{ textAlign: 'center', marginTop: '20px' }}>
-              {loading ? "Котик ищет..." : "Введите ингредиент"}
-            </p>
           </>
         ) : (
           <div>
-            <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{recipe}</div>
-            <button className="button" onClick={() => setRecipe(null)}>Начать заново</button>
+            <div className="recipeContent">{recipe}</div>
+            <button className="button" style={{marginTop: '20px', background: '#7D8B89'}} onClick={() => setRecipe(null)}>Начать заново</button>
           </div>
         )}
       </div>
