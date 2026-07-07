@@ -2,10 +2,12 @@
 import { useState } from 'react';
 
 export default function Page() {
-  const [recipe, setRecipe] = useState<any>(null);
+  const [ingredient, setIngredient] = useState("");
+  const [recipe, setRecipe] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function getRecipe(ingredient: string) {
+  async function handleSearch() {
+    if (!ingredient.trim()) return;
     setLoading(true);
     const res = await fetch('/api/recipe', {
       method: 'POST',
@@ -17,22 +19,30 @@ export default function Page() {
   }
 
   return (
-    <div className={styles.container}>
-      <h1>🐾 Китти Кичен</h1>
-      <p>Скандинавский уют и рецепты</p>
+    <div className="container">
+      <header style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <h1 style={{ color: '#5F7A76' }}>Китти Кичен</h1>
+      </header>
       
-      <div className={styles.card}>
+      <div className="card">
         {!recipe ? (
-          <div className={styles.inputGroup}>
-            <input placeholder="Что сегодня в холодильнике?.." onKeyDown={(e) => {
-              if (e.key === 'Enter') getRecipe(e.currentTarget.value);
-            }} />
-          </div>
+          <>
+            <input 
+              className="inputField" 
+              placeholder="Что сегодня в холодильнике?.." 
+              value={ingredient}
+              onChange={(e) => setIngredient(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            />
+            <button className="button" onClick={handleSearch}>Найти</button>
+            <p style={{ textAlign: 'center', marginTop: '20px' }}>
+              {loading ? "Котик ищет..." : "Введите ингредиент"}
+            </p>
+          </>
         ) : (
           <div>
-            <h3>Скандинавский рецепт</h3>
-            <div style={{ whiteSpace: 'pre-wrap' }}>{recipe}</div>
-            <button onClick={() => setRecipe(null)} className={styles.button} style={{marginTop: '20px'}}>Начать заново</button>
+            <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{recipe}</div>
+            <button className="button" onClick={() => setRecipe(null)}>Начать заново</button>
           </div>
         )}
       </div>
