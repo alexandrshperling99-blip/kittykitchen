@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
+import styles from './page.module.css';
 
 export default function Page() {
-  const [recipe, setRecipe] = useState("");
+  const [recipe, setRecipe] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   async function getRecipe(ingredient: string) {
@@ -17,17 +18,24 @@ export default function Page() {
   }
 
   return (
-    <div style={{ padding: '40px', maxWidth: '600px', margin: 'auto', fontFamily: 'sans-serif' }}>
+    <div className={styles.container}>
       <h1>🐾 Китти Кичен</h1>
-      <input 
-        placeholder="Что в холодильнике?" 
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') getRecipe(e.currentTarget.value);
-        }}
-        style={{ width: '100%', padding: '10px', marginBottom: '20px' }}
-      />
-      <div style={{ padding: '20px', border: '1px solid #ccc' }}>
-        {loading ? "Котик думает..." : (recipe || "Напиши ингредиент и нажми Enter")}
+      <p>Скандинавский уют и рецепты</p>
+      
+      <div className={styles.card}>
+        {!recipe ? (
+          <div className={styles.inputGroup}>
+            <input placeholder="Что сегодня в холодильнике?.." onKeyDown={(e) => {
+              if (e.key === 'Enter') getRecipe(e.currentTarget.value);
+            }} />
+          </div>
+        ) : (
+          <div>
+            <h3>Скандинавский рецепт</h3>
+            <div style={{ whiteSpace: 'pre-wrap' }}>{recipe}</div>
+            <button onClick={() => setRecipe(null)} className={styles.button} style={{marginTop: '20px'}}>Начать заново</button>
+          </div>
+        )}
       </div>
     </div>
   );
