@@ -1,0 +1,42 @@
+.container {
+  min-height: 100vh;
+  background-color: #F8F9F9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4A5568;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #E2E8F0;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #CBD5E0;
+  border-radius: 12px;
+}
+
+.button {
+  background: #5F7A76;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
